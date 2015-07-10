@@ -2,8 +2,8 @@
  * Created by uzysjung on 15. 7. 9..
  */
 
-var Code = require('Code');
-var Lab = require('Lab');
+var Code = require('code');
+var Lab = require('lab');
 
 var lab = exports.lab = Lab.script();
 
