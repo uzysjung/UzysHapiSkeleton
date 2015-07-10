@@ -1,0 +1,58 @@
+{
+  "name": "uzyshapiskeleton",
+  "version": "0.1.0",
+  "description": "Hapi.js Application Skeleton",
+  "main": "app.js",
+  "scripts": {
+    "start": "./node_modules/.bin/pm2 start app.js -i max",
+    "test": "lab -C -c -m 15000",
+    "coverage" : "rm coverage.html && lab -C -c -m 15000 -r html -o coverage.html",
+    "deps": "npm list --depth 0",
+    "outdated": "npm outdated --depth 0",
+    "jslint": "rm coverage.html && lab -C -L -l -r html -o coverage.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uzysjung/UzysHapiSkeleton.git"
+  },
+  "keywords": [
+    "Uzys",
+    "Hapi",
+    "Hapijs",
+    "Hapi.js",
+    "Node",
+    "Node.js",
+    "Skeleton"
+  ],
+  "dependencies": {
+    "hapi": "^8.8.0",
+    "hapi-swagger": "^0.7.2",
+    "boom": "^2.8.0",
+    "good": "^6.2.0",
+    "good-console": "^5.0.2",
+    "pm2": "^0.14.3",
+    "tv": "^4.1.0",
+    "joi": "^6.5.0",
+    "debug":"2.1.x",
+    "async" : "*",
+    "request" : "*",
+    "mysql" : "^2.5.x",
+    "underscore": "^1.8.3",
+    "underscore.string": "^3.1.1",
+    "bcrypt": "^0.8.3",
+    "hapi-auth-basic":"^3.0.0",
+    "handlebars":"^3.0.3",
+    "knex": "^0.7.0"
+  },
+  "devDependencies": {
+    "code": "^1.4.1",
+    "lab": "^5.13.0",
+    "node-inspector": "^0.11.1"
+  },
+  "author": "Uzysjung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uzysjung/UzysHapiSkeleton/issues"
+  },
+  "homepage": "https://github.com/uzysjung/UzysHapiSkeleton#readme"
+}
