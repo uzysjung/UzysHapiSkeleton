@@ -28,8 +28,7 @@ module.exports = function(server) {
   server.register(goodConfig, function(err){
       if(err) {
           server.log(['error', 'plugin'], 'plugin: good register error');
-      }
-      else {
+      } else {
           server.log(['info', 'plugin'], 'plugin: good registered');
           server.log(['info','plugin'], "GOOD_CONSOLE Config:",goodConfig);
 

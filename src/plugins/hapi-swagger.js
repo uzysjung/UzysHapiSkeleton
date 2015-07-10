@@ -16,8 +16,7 @@ module.exports = function(server) {
   server.register(swaggerConfig, function(err){
       if(err) {
         server.log(['error', 'plugin'], 'plugin: Swagger register error');
-      }
-      else {
+      } else {
         server.log(['info', 'plugin'], 'plugin: Swagger registered');
       }
   });

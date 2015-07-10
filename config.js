@@ -13,7 +13,7 @@ function _mysql() {
             user     : 'root',
             password : 'root',
             database : 'UzysHapiSkeleton'
-        }
+        };
 
     } else {
         return {
@@ -21,7 +21,7 @@ function _mysql() {
             user     : 'root',
             password : 'root',
             database : 'UzysHapiSkeleton_production'
-        }
+        };
 
     }
 

@@ -10,8 +10,7 @@ module.exports = function(server) {
   server.register(Tvconfig, function(err){
       if(err) {
           server.log(['error', 'plugin'], 'plugin: TV register error');
-      }
-      else {
+      } else {
           server.log(['info', 'plugin'], 'plugin: TV registered');
       }
   });

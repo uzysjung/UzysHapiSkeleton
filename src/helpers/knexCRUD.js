@@ -1,6 +1,7 @@
 /**
  * Created by uzysjung on 15. 2. 4..
  */
+"use strict";
 
 exports = module.exports = function (db, table) {
 

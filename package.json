@@ -5,11 +5,13 @@
   "main": "app.js",
   "scripts": {
     "start": "./node_modules/.bin/pm2 start app.js -i max",
-    "test": "lab -C -c -m 15000",
-    "coverage" : "rm coverage.html && lab -C -c -m 15000 -r html -o coverage.html",
-    "deps": "npm list --depth 0",
+    "test": "lab -C -c -m 2000",
+
+    "stop": "./node_modules/.bin/pm2 stop app.js",
+    "coverage" : "rm coverage.html && lab -r html -o coverage.html",
+    "dep": "npm list --depth 0",
     "outdated": "npm outdated --depth 0",
-    "jslint": "rm coverage.html && lab -C -L -l -r html -o coverage.html"
+    "jshint": "./node_modules/jshint/bin/jshint *.js src test;true"
   },
   "repository": {
     "type": "git",
@@ -42,12 +44,13 @@
     "bcrypt": "^0.8.3",
     "hapi-auth-basic":"^3.0.0",
     "handlebars":"^3.0.3",
-    "knex": "^0.7.0"
+    "knex": "^0.8.6"
   },
   "devDependencies": {
     "code": "^1.4.1",
     "lab": "^5.13.0",
-    "node-inspector": "^0.11.1"
+    "node-inspector": "^0.11.1",
+    "jshint":"^2.8.0"
   },
   "author": "Uzysjung",
   "license": "MIT",

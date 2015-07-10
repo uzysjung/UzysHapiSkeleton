@@ -5,10 +5,10 @@
 var Hapi = require('hapi');
 var config = require('./config');
 var server = new Hapi.Server();
-server.connection({ port: config.PORT, routes:{cors:true} });
+server.connection({ port: config.PORT, routes: { cors: true } });
 server.views({
     engines: {
-        html: require('handlebars'),
+        html: require('handlebars')
         //ejs : require('ejs')
     },
     relativeTo: __dirname,
@@ -35,3 +35,4 @@ server.start(function () {
 });
 
 module.exports = server;
+

@@ -12,19 +12,19 @@ var test = lab.test;
 var before = lab.before;
 var after = lab.after;
 var expect = Code.expect;
-
-Lab.test("main endpoint lists apis on the network", function(done) {
+var server = require('../app');
+lab.test("main endpoint lists apis on the network", function(done) {
     var options = {
         method: "GET",
-        url: "/api"
+        url: "/api/3"
     };
 
     server.inject(options, function(response) {
         var result = response.result;
-
-        Lab.expect(response.statusCode).to.equal(200);
-        Lab.expect(result).to.be.instanceof(Array);
-        Lab.expect(result).to.have.length(5);
+        console.log('test',result.name);
+        Code.expect(response.statusCode).to.equal(200);
+        Code.expect(result.name).to.be.instanceof(Array);
+        Code.expect(result.name).to.have.length(3);
 
         done();
     });
@@ -41,9 +41,9 @@ lab.experiment('math', function () {
 });
 
 //BDD
-describe('math', function () {
+lab.describe('math', function () {
 
-    it('returns true when 1 + 1 equals 2', function (done) {
+    lab.it('returns true when 1 + 1 equals 2', function (done) {
 
         expect(1+1).to.equal(2);
         done();

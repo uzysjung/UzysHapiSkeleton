@@ -30,8 +30,7 @@ module.exports = function(server) {
     server.register(require('hapi-auth-basic'), function (err) {
         if(err) {
             server.log(['error', 'plugin'], 'plugin: Hapi-auth-basic register error');
-        }
-        else {
+        } else {
             server.auth.strategy('simple', 'basic', { validateFunc: validate });
             //server.route({ method: 'GET', path: '/', config: { auth: 'simple' } });
             server.log(['info', 'plugin'], 'plugin: Hapi-auth-basic registered');
