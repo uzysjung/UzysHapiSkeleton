@@ -38,8 +38,6 @@ exports= module.exports = {};
 exports.mysql = _mysql();
 exports.PORT = _port();
 exports.NODE_ENV = _type || 'production';
-exports.SWAGGER_URL =  process.env.SWAGGER_URL || 'http://0.0.0.0:'+_port();
-exports.LOGLEVEL = process.env.LOG_LEVEL || 'INFO';
 exports.GOOD_CONSOLE = process.env.GOOD_CONSOLE || 'log,response,request,error';
 
 

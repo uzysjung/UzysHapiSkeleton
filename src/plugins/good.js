@@ -1,9 +1,8 @@
 
 
 var config = require('../../config');
-var events = function (strEvents) {
-    console.log('config.GOOD_CONSOLE:',strEvents);
-  return strEvents.split(',').reduce(function(p, c, i){
+var events = function (str) {
+  return str.split(',').reduce(function(p, c, i){
     p[c] = '*';
     return p;
   }, {});
@@ -31,7 +30,6 @@ module.exports = function(server) {
       } else {
           server.log(['info', 'plugin'], 'plugin: good registered');
           server.log(['info','plugin'], "GOOD_CONSOLE Config:",goodConfig);
-
       }
   });
 };
