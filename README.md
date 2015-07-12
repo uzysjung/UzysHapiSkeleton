@@ -36,7 +36,7 @@ Hapi.js MVC pattern Template
  ## Configuration file & Environment Variable.
   - NODE_ENV = development , production -> export NODE_ENV=development
   - PORT = 8080 (only apply this to production environment)
-  - GOOD_CONSOLE = 'log,response,request,error' -> export GOOD_CONSOLE = 'request,error'
+  - GOOD_CONSOLE = 'log,response,request,error'
 
  ## Authentication
   - initial ID / Password : uzysjung/uzysjung
