@@ -28,7 +28,7 @@ Hapi.js MVC pattern Template
 - npm start : start app
 - npm stop : stop app
 - npm test : run test
-- npm coverage : run testcast and make report file (coverage.html)
+- npm coverage : run test and make report file (coverage.html)
 - npm dep : dependency check
 - npm outdated : check outdated npm module
 - npm jshint : run jshint
