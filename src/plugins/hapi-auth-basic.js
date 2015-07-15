@@ -17,7 +17,7 @@ var validate = function (request, username, password, callback) {
     }
 
     bcrypt.compare(password, Adminusers.password, function (err, isValid) {
-        console.log(err);
+        if(err) console.log(err);
         callback(err, isValid, { id: user.id, name: user.name });
     });
 };
