@@ -6,12 +6,13 @@
   "scripts": {
     "start": "./node_modules/.bin/pm2 start app.js -i max",
     "test": "lab -C -c -m 2000",
-
+    "debug": "export NODE_ENV=development &&nodemon --debug ./server.js",
     "stop": "./node_modules/.bin/pm2 stop app.js",
     "coverage" : "rm coverage.html && lab -r html -o coverage.html",
     "dep": "npm list --depth 0",
     "outdated": "npm outdated --depth 0",
-    "jshint": "./node_modules/jshint/bin/jshint *.js src test;true"
+    "jshint": "./node_modules/jshint/bin/jshint *.js src test;true",
+    "inspector":"./node_modules/node-inspector/bin/inspector.js"
   },
   "repository": {
     "type": "git",
@@ -50,7 +51,8 @@
     "code": "^1.4.1",
     "lab": "^5.13.0",
     "node-inspector": "^0.11.1",
-    "jshint":"^2.8.0"
+    "jshint":"^2.8.0",
+    "nodemon":"^1.3.7"
   },
   "author": "Uzysjung",
   "license": "MIT",
