@@ -6,7 +6,7 @@ Hapi.js MVC pattern Template
 **UzysHapiSkeleton** is a MVC pattern Skeleton
 
 ## Hapi plugin
-- TV (endpoint: /console/debug)
+- TV (endpoint: /debug/console)
 - Hapi Swagger (endpoint: /documentation)
 - Hapi-auth-basic (ID: uzysjung / Password : uzysjung)
 - Lab
