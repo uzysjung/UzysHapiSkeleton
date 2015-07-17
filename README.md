@@ -23,15 +23,19 @@ Hapi.js MVC pattern Template
 - bcrypt
 - handlebars
 - knex
+- nodemon
+- node-inspector
 
 ## NPM Script
 - npm start : start app
 - npm stop : stop app
 - npm test : run test
-- npm coverage : run test and make report file (coverage.html)
-- npm dep : dependency check
-- npm outdated : check outdated npm module
-- npm jshint : run jshint
+- npm run coverage : run test and make report file (coverage.html)
+- npm run dep : dependency check
+- npm run outdated : check outdated npm module
+- npm run jshint : run jshint
+- npm run debug : run debug mode
+- npm run inspector : run node-inspector
 
 ## Configuration file & Environment Variable.
 - NODE_ENV = development , production -> export NODE_ENV=development
