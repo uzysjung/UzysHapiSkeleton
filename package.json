@@ -8,7 +8,7 @@
     "test": "lab -C -c -m 2000",
     "debug": "export NODE_ENV=development &&nodemon --debug ./server.js",
     "stop": "./node_modules/.bin/pm2 stop app.js",
-    "coverage" : "rm coverage.html && lab -r html -o coverage.html",
+    "coverage" : "if test -f './converage.html'; then  rm coverage.html; fi && lab -r html -o coverage.html",
     "dep": "npm list --depth 0",
     "outdated": "npm outdated --depth 0",
     "jshint": "./node_modules/jshint/bin/jshint *.js src test;true",
