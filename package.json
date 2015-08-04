@@ -6,7 +6,7 @@
   "scripts": {
     "start": "./node_modules/.bin/pm2 start app.js -i max",
     "test": "lab -C -c -m 2000",
-    "debug": "export NODE_ENV=development &&nodemon --debug ./server.js",
+    "debug": "export NODE_ENV=development &&nodemon --debug -e js,html app.js --type=development",
     "stop": "./node_modules/.bin/pm2 stop app.js",
     "coverage" : "if test -f './converage.html'; then  rm coverage.html; fi && lab -r html -o coverage.html",
     "dep": "npm list --depth 0",
