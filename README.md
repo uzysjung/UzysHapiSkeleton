@@ -4,7 +4,7 @@ Hapi.js MVC pattern Template
 
 ## Introduction
 **UzysHapiSkeleton** is a MVC pattern Skeleton
-* based on Hapi.js 8.8.x
+* based on Hapi.js 11.1.x Node 5.0
 
 ## Hapi plugin
 - TV (endpoint: /debug/console)
