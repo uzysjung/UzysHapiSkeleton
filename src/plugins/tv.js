@@ -4,10 +4,7 @@
 var Tvconfig = {
   register: require('tv'),
   options: {
-      //authenticateEndpoint:'simple',
-
-
-
+      authenticateEndpoint:'simple',
   } //authentication using hapi-auth-basic
 };
 

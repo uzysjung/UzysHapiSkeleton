@@ -7,7 +7,9 @@ var vision = require('vision');
 module.exports = function(server) {
     server.register(vision, function(err){
         if(err) {
-            server.log(['error', 'plugin'], 'plugin: vision register error');
+             server.log(['error', 'plugin'], 'plugin: vision register error');
+        } else {
+            server.log(['info', 'plugin'], 'plugin: vision registered');
         }
 
         server.views({
