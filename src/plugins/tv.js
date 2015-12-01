@@ -9,11 +9,17 @@ var Tvconfig = {
 };
 
 module.exports = function(server) {
-  server.register(Tvconfig, function(err){
-      if(err) {
-          server.log(['error', 'plugin'], 'plugin: TV register error');
-      } else {
-          server.log(['info', 'plugin'], 'plugin: TV registered');
-      }
-  });
+
+    return new Promise(function(resolve,reject) {
+
+        server.register(Tvconfig, function(err){
+            if(err) {
+                server.log(['error', 'plugin'], 'plugin: TV register error');
+                reject(err);
+            } else {
+                server.log(['info', 'plugin'], 'plugin: TV registered');
+                resolve();
+            }
+        });
+    });
 };

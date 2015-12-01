@@ -4,8 +4,8 @@
 var bcrypt = require('bcrypt');
 
 var Adminusers = {
-        username: 'uzysjung',
-        password: '$2a$10$tWLZxWZ7Y7qbu5nPjUkQBOzfsHkxzqLU4yxUgzt4qVLk7pYVEPHRG',   // 'secret'
+    username: 'uzysjung',
+    password: '$2a$10$tWLZxWZ7Y7qbu5nPjUkQBOzfsHkxzqLU4yxUgzt4qVLk7pYVEPHRG',   // 'secret'
 };
 
 var validate = function (request, username, password, callback) {
@@ -25,16 +25,25 @@ var validate = function (request, username, password, callback) {
 
 
 module.exports = function(server) {
-    server.register(require('hapi-auth-basic'), function (err) {
-        if(err) {
-            server.log(['error', 'plugin'], 'plugin: Hapi-auth-basic register error');
-        } else {
-            server.auth.strategy('simple', 'basic', { validateFunc: validate });
-            //server.route({ method: 'GET', path: '/', config: { auth: 'simple' } });
-            server.log(['info', 'plugin'], 'plugin: Hapi-auth-basic registered');
 
-        }
+    return new Promise(function(resolve,reject) {
+
+        server.register(require('hapi-auth-basic'), function (err) {
+            if(err) {
+                server.log(['error', 'plugin'], 'plugin: Hapi-auth-basic register error');
+                reject(err);
+            } else {
+                server.auth.strategy('simple', 'basic', { validateFunc: validate });
+                //server.route({ method: 'GET', path: '/', config: { auth: 'simple' } });
+                server.log(['info', 'plugin'], 'plugin: Hapi-auth-basic registered');
+                resolve();
+            }
+        });
+
     });
+
+
+
 };
 
 

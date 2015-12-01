@@ -24,12 +24,19 @@ var goodConfig = {
 };
 
 module.exports = function(server) {
-  server.register(goodConfig, function(err){
-      if(err) {
-          server.log(['error', 'plugin'], 'plugin: good register error');
-      } else {
-          server.log(['info', 'plugin'], 'plugin: good registered');
-          server.log(['info','plugin'], "GOOD_CONSOLE Config:",goodConfig);
-      }
-  });
+
+    return new Promise(function(resolve,reject) {
+        server.register(goodConfig, function(err){
+            if(err) {
+                server.log(['error', 'plugin'], 'plugin: good register error');
+                reject(err);
+            } else {
+                server.log(['info', 'plugin'], 'plugin: good registered');
+                server.log(['info','plugin'], "GOOD_CONSOLE Config:",goodConfig);
+                resolve();
+            }
+        });
+    });
+
+
 };

@@ -13,11 +13,19 @@ var swaggerConfig = {
 };
 
 module.exports = function(server) {
-  server.register(swaggerConfig, function(err){
-      if(err) {
-        server.log(['error', 'plugin'], 'plugin: Swagger register error');
-      } else {
-        server.log(['info', 'plugin'], 'plugin: Swagger registered');
-      }
-  });
+
+    return new Promise(function(resolve,reject) {
+        server.register(swaggerConfig, function(err){
+            if(err) {
+                server.log(['error', 'plugin'], 'plugin: Swagger register error');
+                reject(err);
+            } else {
+                server.log(['info', 'plugin'], 'plugin: Swagger registered');
+                resolve();
+            }
+        });
+    });
+
+
+
 };
