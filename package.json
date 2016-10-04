@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "pm2 start app.js -i max",
-    "test": "lab -C -c -m 2000",
+    "test": "lab -C -c -m 2000 -I __core-js_shared__",
     "debug": "./node_modules/devtool/bin/index.js app.js",
     "dev" : "export NODE_ENV=development &&nodemon  -e js,html app.js --type=development",
     "stop": "./node_modules/.bin/pm2 stop app.js",

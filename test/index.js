@@ -21,7 +21,7 @@ lab.test("main endpoint lists apis on the network", function(done) {
 
     server.inject(options, function(response) {
         var result = response.result;
-        console.log('test',result.name);
+        console.log('result:',result);
         Code.expect(response.statusCode).to.equal(200);
         Code.expect(result.name).to.be.instanceof(Array);
         Code.expect(result.name).to.have.length(3);

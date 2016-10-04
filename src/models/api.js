@@ -1,19 +1,23 @@
 /**
  * Created by 1002125 on 15. 7. 9..
  */
-var db = require('../helpers/db');
-var crud = require('../helpers/knexCRUD');
 
-exports=module.exports = crud(db,'updateDate');
 
-/*-------for customization---------*/
-module.exports.getUpdateDate = function(cb) {
+'use strict';
 
-    db('updateDate').limit(1).orderBy('id','desc')
-        .then(function(rows){
-            cb(null,rows);
-        }).catch(function(error){
-            cb(error,null);
-        });
+const UzysDB    = require('../helpers/UzysDB');
+const Co        = require('co');
+const _         = require('lodash');
 
-};
+
+class APITable extends UzysDB {
+
+    constructor(tableName) {
+
+        super(tableName);
+    }
+}
+
+exports = module.exports = new APITable('APITable');
+
+
