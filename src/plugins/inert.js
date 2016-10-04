@@ -3,8 +3,9 @@
  */
 var inert = require('inert');
 
+//Static file and directory handlers plugin for hapi.js.
 
-module.exports = function(server) {
+exports = module.exports = function(server) {
 
     return new Promise(function(resolve,reject) {
         server.register(inert, function(err){

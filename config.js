@@ -1,45 +1,53 @@
 /**
  * Created by Uzysjung on 15. 7. 9..
  */
-"use strict";
+'use strict';
 
-var _type = process.env.NODE_ENV;
+class Config {
 
-function _mysql() {
-    if(_type === 'development') {
+    constructor() {
+    }
+    get type() {
+        return process.env.NODE_ENV;
+    }
+    get mysql() {
 
-        return {
-            host     : 'localhost',
-            user     : 'root',
-            password : 'root',
-            database : 'UzysHapiSkeleton'
-        };
-
-    } else {
-        return {
+        let ret = {
             host     : 'production.io',
             user     : 'root',
             password : 'root',
             database : 'UzysHapiSkeleton_production'
         };
+        if (this.type === 'development') {
 
+            ret = {
+                host: 'localhost',
+                user: 'root',
+                password: 'root',
+                database: 'UzysHapiSkeleton'
+            };
+        }
+        return ret;
     }
+    get MYSQL_POOL() {
+        if ( process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test' ) {
+            return { min: 0, max: 20 };
+        }
 
-}
+        return { min: 0, max: 20 };
+    }
+    get port() {
 
-function _port() {
-    if(_type==='development') {
-        return 8000;
-    } else {
+        if (this.type === 'development') {
+            return 8000;
+        }
         return process.env.PORT;
     }
+
+    get MYSQL_TIMEOUT() {
+        return 1500;
+    }
+
 }
-exports= module.exports = {};
-exports.mysql = _mysql();
-exports.PORT = _port();
-exports.NODE_ENV = _type || 'production';
-exports.GOOD_CONSOLE = process.env.GOOD_CONSOLE || 'log,response,request,error';
 
-
-
-
+exports = module.exports = new Config();

@@ -1,7 +1,7 @@
 /**
  * Created by 1002125 on 15. 7. 9..
  */
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 var Adminusers = {
     username: 'uzysjung',

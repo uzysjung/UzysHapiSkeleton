@@ -1,50 +1,57 @@
 /**
  * Created by 1002125 on 15. 7. 9..
  */
+'use strict';
+const Hapi = require('hapi');
+const Config = require('./config');
+const server = new Hapi.Server();
+const Co = require('co');
+
+server.connection({ port: Config.port, routes: { cors: true , jsonp: 'callback' } });
+
+Co(function*() {
+    yield require('./src/plugins/hapi-pino')(server);
+    yield [require('./src/plugins/inert')(server), require('./src/plugins/vision')(server)];
+    yield require('./src/plugins/scooter')(server);
+    yield require('./src/plugins/hapi-auth-basic')(server);
+    yield require('./src/plugins/hapi-swagger')(server);
 
 
-var Hapi = require('hapi');
-var config = require('./config');
-var server = new Hapi.Server();
-var pluginsLoader = require('./src/helpers/pluginsLoader');
-server.connection({ port: config.PORT, routes: { cors: true } });
+    server.route(require('./src/routes/api'));
+    //for static file but not recommend due to performance , use nginx.
+    server.route({ method: 'GET', path: '/public/{path*}', handler: { directory: { path: './public' ,redirectToSlash: true } } });
+
+    server.start((err) => {
+
+        if (err) {
+            server.log(['error', 'server'],'Server Error Occured' + err);
+            process.exit();
+        }
+        server.log(['info', 'server'], 'Server environment: ' + Config.type);
+        server.log(['info', 'server'], 'Server running at: ' + server.info.uri);
+    });
 
 
-pluginsLoader(
-    [
-        require('./src/plugins/good')(server),
-        require('./src/plugins/inert')(server),
-        require('./src/plugins/vision')(server),
-        require('./src/plugins/hapi-auth-basic')(server), //uzysjung:uzysjung
-        require('./src/plugins/hapi-swagger')(server) // http://localhost:PORT/documentation
+}).catch( (e) => {
 
-    ],
-    [
-        require('./src/plugins/tv')(server) // http://localhost:PORT/debug/console - //inert,vision needed
-    ]
-    )
-    .then(function(results){
+    server.log('app.js error:',e);
+    server.log('stack - ',e.stack);
+});
 
-        server.route(require('./src/routes/api'));
+process.on('SIGINT', () => {
 
-        //for static file but not recommend due to performance , use nginx.
-        server.route({ method: 'GET', path: '/public/{path*}', handler: { directory: { path: './public' ,redirectToSlash: true} } });
+    // My process has received a SIGINT signal
+    // Meaning PM2 is now trying to stop the process
+    server.stop({ timeout:1000 }, (err) => {
 
-        server.start(function (err) {
-            if(err) {
-                server.log(['error', 'server'],'Server Error Occured' + err);
-                process.exit();
-            }
-            server.log(['info', 'server'], 'Server environment: ' + config.NODE_ENV);
-            server.log(['info', 'server'], 'Server running at: ' + server.info.uri);
-        });
-
-
-    })
-    .catch(function(err){
-        server.log(['error', 'server'],'plugin registeration error Occured' + err);
+        if (err) {
+            console.error(err);
+        }
+        server.log('Colloseo Hapi server stopped');
         process.exit();
     });
+});
+
 
 module.exports = server;
 
