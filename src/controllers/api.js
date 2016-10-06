@@ -3,41 +3,45 @@
  */
 'use strict';
 const DEBUG = require('debug')('api');
-const modelAPI = require('../models/api');
+const ModelAPI = require('../models/api');
 
-class ControllerAPI {
+exports = module.exports = {
+    list: function (request,reply) {
 
-    list(request,reply) {
-        var id = request.params.id;
-        var page = request.query.page;
+        const id = request.params.id;
+        const page = request.query.page;
         request.log('api params.id :',id);
 
-        reply({name:['api1','api2','api3'],id:id,page:page});
-    }
-    root(request,reply) {
+        reply( { name : ['api1','api2','api3'], id, page } );
+    },
+    root: function (request,reply) {
+
         reply.view('index', { title: 'UzysHapiSkeleton' });
-    }
-    auth(request,reply) {
+    },
+    auth: function (request,reply) {
+
         reply.view('authentication', { title: 'UzysHapiSkeleton Basic authentication' });
     }
-}
+};
 
-exports = module.exports = new ControllerAPI();
-
-//module.exports = {
-//    list: function (request,reply) {
-//        var id = request.params.id;
-//        var page = request.query.page;
+//class ControllerAPI {
+//
+//    list(request,reply) {
+//
+//        const id = request.params.id;
+//        const page = request.query.page;
 //        request.log('api params.id :',id);
 //
-//        reply({name:["api1","api2","api3"],id:id,page:page});
-//    },
-//    root: function (request,reply) {
-//        reply.view('index', { title: 'UzysHapiSkeleton' });
-//    },
-//    auth: function (request,reply) {
-//        reply.view('authentication', { title: 'UzysHapiSkeleton Basic authentication' });
-//
+//        reply( { name : ['api1','api2','api3'], id, page } );
 //    }
-//};
-
+//    root(request,reply) {
+//
+//        reply.view('index', { title: 'UzysHapiSkeleton' });
+//    }
+//    auth(request,reply) {
+//
+//        reply.view('authentication', { title: 'UzysHapiSkeleton Basic authentication' });
+//    }
+//}
+//
+//exports = module.exports = new ControllerAPI();

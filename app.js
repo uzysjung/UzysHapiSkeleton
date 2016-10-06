@@ -12,7 +12,7 @@ server.connection({ port: Config.port, routes: { cors: true , jsonp: 'callback' 
 Co(function*() {
 
     yield require('./src/plugins/hapi-pino')(server);
-    yield [ require('./src/plugins/inert')(server), require('./src/plugins/vision')(server) ];
+    yield [require('./src/plugins/inert')(server), require('./src/plugins/vision')(server)];
     yield require('./src/plugins/scooter')(server);
     yield require('./src/plugins/hapi-auth-basic')(server);
     yield require('./src/plugins/hapi-swagger')(server);

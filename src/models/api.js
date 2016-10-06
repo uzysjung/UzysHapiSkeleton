@@ -18,6 +18,6 @@ class APITable extends UzysDB {
     }
 }
 
-exports = module.exports = new APITable('APITable');
+module.exports = new APITable('APITable');
 
 

@@ -1,38 +1,44 @@
 /**
  * Created by 1002125 on 15. 7. 9..
  */
-var bcrypt = require('bcryptjs');
+'use strict';
+const Bcrypt = require('bcryptjs');
 
-var Adminusers = {
+const Adminusers = {
     username: 'uzysjung',
-    password: '$2a$10$tWLZxWZ7Y7qbu5nPjUkQBOzfsHkxzqLU4yxUgzt4qVLk7pYVEPHRG',   // 'secret'
+    password: '$2a$10$tWLZxWZ7Y7qbu5nPjUkQBOzfsHkxzqLU4yxUgzt4qVLk7pYVEPHRG'   // 'secret'
 };
 
-var validate = function (request, username, password, callback) {
+const validate = function (request, username, password, callback) {
 
 
-    var user = Adminusers.username;
+    const user = Adminusers.username;
     if (!user) {
         return callback(null, false);
     }
 
-    bcrypt.compare(password, Adminusers.password, function (err, isValid) {
-        if(err) console.log(err);
+    Bcrypt.compare(password, Adminusers.password, ( err, isValid) => {
+
+        if (err) {
+            console.log(err);
+        }
         callback(err, isValid, { id: user.id, name: user.name });
     });
 };
 
 
 
-module.exports = function(server) {
+exports = module.exports = function (server) {
 
-    return new Promise(function(resolve,reject) {
+    return new Promise( (resolve,reject) => {
 
-        server.register(require('hapi-auth-basic'), function (err) {
-            if(err) {
+        server.register(require('hapi-auth-basic'), (err) => {
+
+            if (err) {
                 server.log(['error', 'plugin'], 'plugin: Hapi-auth-basic register error');
                 reject(err);
-            } else {
+            }
+            else {
                 server.auth.strategy('simple', 'basic', { validateFunc: validate });
                 //server.route({ method: 'GET', path: '/', config: { auth: 'simple' } });
                 server.log(['info', 'plugin'], 'plugin: Hapi-auth-basic registered');
@@ -42,14 +48,12 @@ module.exports = function(server) {
 
     });
 
-
-
 };
 
 
-function genBcryptHash(passwd) {
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(passwd, salt);
+function genBcryptHash (passwd) {
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(passwd, salt);
     console.log('compare:',bcrypt.compareSync(passwd, hash));
     console.log('hash:',hash);
 }

@@ -1,10 +1,12 @@
 /**
  * Created by 1002125 on 15. 7. 9..
  */
-var ApiController = require('../controllers/api');
-var ApiValidate = require('../validations/api');
+'use strict';
+const ApiController = require('../controllers/api');
+const ApiValidate = require('../validations/api');
 
-module.exports = function() {
+module.exports = function () {
+
     return [
         {
             method: 'GET',
