@@ -10,8 +10,8 @@ exports = module.exports = {
 
         const id = request.params.id;
         const page = request.query.page;
-        request.log('api params.id :',id);
-
+        request.log('api params.id',id);
+        request.log('userAgent',request.plugins.scooter.toJSON());
         reply( { name : ['api1','api2','api3'], id, page } );
     },
     root: function (request,reply) {
