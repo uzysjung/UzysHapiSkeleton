@@ -1,26 +1,28 @@
 /**
  * Created by uzysjung on 15. 7. 9..
  */
+'use strict';
+const Code = require('code');
+const Lab = require('lab');
 
-var Code = require('code');
-var Lab = require('lab');
+const lab = exports.lab = Lab.script();
 
-var lab = exports.lab = Lab.script();
+const suite = lab.suite;
+const test = lab.test;
+const before = lab.before;
+const after = lab.after;
+const expect = Code.expect;
+const Server = require('../app');
+lab.test('main endpoint lists apis on the network', (done) => {
 
-var suite = lab.suite;
-var test = lab.test;
-var before = lab.before;
-var after = lab.after;
-var expect = Code.expect;
-var server = require('../app');
-lab.test("main endpoint lists apis on the network", function(done) {
-    var options = {
-        method: "GET",
-        url: "/api/3"
+    const options = {
+        method: 'GET',
+        url: '/api/3'
     };
 
-    server.inject(options, function(response) {
-        var result = response.result;
+    Server.inject(options, (response) => {
+
+        const result = response.result;
         console.log('result:',result);
         Code.expect(response.statusCode).to.equal(200);
         Code.expect(result.name).to.be.instanceof(Array);
@@ -31,21 +33,21 @@ lab.test("main endpoint lists apis on the network", function(done) {
 });
 
 
-lab.experiment('math', function () {
+lab.experiment('math', () => {
 
-    lab.test('returns true when 1 + 1 equals 2', function (done) {
+    lab.test('returns true when 1 + 1 equals 2', (done) => {
 
-        Code.expect(1+1).to.equal(2);
+        Code.expect( 1 + 1 ).to.equal(2);
         done();
     });
 });
 
 //BDD
-lab.describe('math', function () {
+lab.describe('math', () => {
 
-    lab.it('returns true when 1 + 1 equals 2', function (done) {
+    lab.it('returns true when 1 + 1 equals 2', (done) => {
 
-        expect(1+1).to.equal(2);
+        expect(1 + 1).to.equal(2);
         done();
     });
 });
