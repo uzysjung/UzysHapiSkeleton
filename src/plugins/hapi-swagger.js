@@ -19,22 +19,15 @@ const swaggerConfig = {
     }
 };
 
-exports = module.exports = function (server) {
 
-    return new Promise( (resolve,reject) => {
+exports = module.exports =  async (server) => {
+    try {
+        await server.register(swaggerConfig);
+    } catch (e) {
+        console.error('Error on Swagger Plugin',e);
+        throw e
+    }
+    console.log(['info', 'plugin'], 'plugin: Swagger registered');
 
-        server.register(swaggerConfig, (err) => {
-            if (err) {
-                server.log(['error', 'plugin'], 'plugin: Swagger register error');
-                reject(err);
-            }
-            else {
-                server.log(['info', 'plugin'], 'plugin: Swagger registered');
-                resolve();
-            }
-        });
-    });
-
-
-
+    return true;
 };

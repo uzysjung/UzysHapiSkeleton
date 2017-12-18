@@ -4,19 +4,14 @@
 'use strict';
 //User-agent information plugin for hapi
 
-exports = module.exports = function (server) {
+exports = module.exports = async (server) => {
 
-    return new Promise((resolve,reject) => {
+    try {
+        await server.register(require('scooter'));
+    } catch (e) {
+        console.error('Error on Scooter Plugin',e);
+        throw e
+    }
+    console.log(['info', 'plugin'], 'plugin: scooter registered');
 
-        server.register(require('scooter'), (err) => {
-
-            if (err) {
-                reject(err);
-            }
-            else {
-                server.log(['info', 'plugin'], 'plugin: scooter registered');
-                resolve();
-            }
-        });
-    });
 };

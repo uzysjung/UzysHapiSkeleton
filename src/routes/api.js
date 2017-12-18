@@ -14,11 +14,25 @@ module.exports = function () {
             config : {
                 description: 'api List',
                 notes: 'query : page=? ',
-                tags :['api'], //you must put in 'api' in order to use Swagger-UI.
+                tags :['api','swagger'], //you must put in 'api' in order to use Swagger-UI.
                 handler: ApiController.list,
                 validate: ApiValidate.list
+
             }
         },
+        {
+            method: 'GET',
+            path: '/api/v2/{id}',
+            config : {
+                description: 'api List',
+                notes: 'query : page=? ',
+                tags :['api','swagger'], //you must put in 'api' in order to use Swagger-UI.
+                handler: ApiController.list,
+                validate: ApiValidate.list
+
+            }
+        },
+
         {
             method: 'GET',
             path: '/',

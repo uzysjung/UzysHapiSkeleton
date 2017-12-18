@@ -5,34 +5,31 @@
 const Vision = require('vision');
 
 
-module.exports = function (server) {
+module.exports = async (server) => {
 
-    return new Promise( (resolve,reject) => {
+    try {
+        await server.register(Vision);
 
-        server.register(Vision, (err) => {
-            if (err) {
-                server.log(['error', 'plugin'], 'plugin: vision register error');
-                reject(err);
-            }
-            else {
-                server.log(['info', 'plugin'], 'plugin: vision registered');
-                resolve();
-                server.views({
-                    engines: {
-                        html: require('handlebars')
-                        //ejs : require('ejs')
-                    },
-                    relativeTo: __dirname,
-                    path: '../views',
-                    layout:'default',
-                    layoutPath: '../views/layout',
-                    partialsPath: '../views/partials'
-                    //helpersPath: './src/views/helpers'
-                });
+        server.views({
 
-            }
+            engines: {
+                html: require('handlebars')
+            },
+            relativeTo: __dirname,
+            path: '../views',
+            layout:'default',
+            layoutPath: '../views/layout',
+            partialsPath: '../views/partials'
+
         });
-    });
+    } catch (e) {
+        console.error(['error', 'plugin'], 'plugin: vision register error');
+        throw e;
+    }
 
+    console.log(['info', 'plugin'], 'plugin: vision registered');
+    return true;
 
 };
+
+

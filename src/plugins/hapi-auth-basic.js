@@ -9,46 +9,41 @@ const Adminusers = {
     password: '$2a$10$tWLZxWZ7Y7qbu5nPjUkQBOzfsHkxzqLU4yxUgzt4qVLk7pYVEPHRG'   // 'secret'
 };
 
-const validate = function (request, username, password, callback) {
-
+const validate = async (request, username, password, h) => {
 
     const user = Adminusers.username;
     if (!user) {
-        return callback(null, false);
+        return { credential : null , isValid: false } ;
     }
 
-    Bcrypt.compare(password, Adminusers.password, ( err, isValid) => {
+    let isValid = false;
+    const credentials = { id: user.id, name: user.name };
+    try {
+        isValid = await Bcrypt.compare( password, Adminusers.password );
+    } catch (e) {
 
-        if (err) {
-            console.log(err);
-        }
-        callback(err, isValid, { id: user.id, name: user.name });
-    });
-};
+    }
 
-
-
-exports = module.exports = function (server) {
-
-    return new Promise( (resolve,reject) => {
-
-        server.register(require('hapi-auth-basic'), (err) => {
-
-            if (err) {
-                server.log(['error', 'plugin'], 'plugin: Hapi-auth-basic register error');
-                reject(err);
-            }
-            else {
-                server.auth.strategy('simple', 'basic', { validateFunc: validate });
-                //server.route({ method: 'GET', path: '/', config: { auth: 'simple' } });
-                server.log(['info', 'plugin'], 'plugin: Hapi-auth-basic registered');
-                resolve();
-            }
-        });
-
-    });
+    return { credentials , isValid };
 
 };
+
+
+
+
+exports = module.exports =  async (server) => {
+    try {
+        await server.register(require('hapi-auth-basic'));
+    } catch (e) {
+        console.error('Error on hapi-auth-basic Plugin',e);
+        throw e
+    }
+    server.auth.strategy('simple', 'basic', { validate });
+    console.log(['info', 'plugin'], 'plugin: Hapi-auth-basic registered');
+
+    return true;
+};
+
 
 
 function genBcryptHash (passwd) {

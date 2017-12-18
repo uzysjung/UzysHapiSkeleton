@@ -6,21 +6,21 @@ const DEBUG = require('debug')('api');
 const ModelAPI = require('../models/api');
 
 exports = module.exports = {
-    list: function (request,reply) {
+    list: function (request,h) {
 
         const id = request.params.id;
         const page = request.query.page;
         request.log('api params.id',id);
         request.log('userAgent',request.plugins.scooter.toJSON());
-        reply( { name : ['api1','api2','api3'], id, page } );
+        return  { name : ['api1','api2','api3'], id, page };
     },
-    root: function (request,reply) {
+    root: function (request,h) {
 
-        reply.view('index', { title: 'UzysHapiSkeleton' });
+        return h.view('index', { title: 'UzysHapiSkeleton' });
     },
-    auth: function (request,reply) {
+    auth: function (request,h) {
 
-        reply.view('authentication', { title: 'UzysHapiSkeleton Basic authentication' });
+        return h.view('authentication', { title: 'UzysHapiSkeleton Basic authentication' });
     }
 };
 

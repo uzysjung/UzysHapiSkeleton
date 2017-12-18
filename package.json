@@ -1,19 +1,18 @@
 {
   "name": "uzyshapiskeleton",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Hapi.js Application Skeleton",
   "main": "app.js",
   "scripts": {
     "start": "pm2 start app.js -i max",
     "test": "lab -C -c -m 2000 -I __core-js_shared__",
-    "debug": "./node_modules/devtool/bin/index.js app.js",
-    "dev" : "export NODE_ENV=development &&nodemon  -e js,html app.js --type=development",
+    "debug": "node --inspect app.js",
+    "dev": "export NODE_ENV=development &&nodemon  -e js,html app.js --type=development",
     "stop": "./node_modules/.bin/pm2 stop app.js",
-    "coverage" : "if test -f './converage.html'; then  rm coverage.html; fi && lab -r html -o coverage.html",
+    "coverage": "if test -f './converage.html'; then  rm coverage.html; fi && lab -r html -o coverage.html",
     "dep": "npm list --depth 0",
     "outdated": "npm outdated --depth 0",
-
-    "inspector":"./node_modules/node-inspector/bin/inspector.js"
+    "inspector": "./node_modules/node-inspector/bin/inspector.js"
   },
   "repository": {
     "type": "git",
@@ -28,33 +27,35 @@
     "Node.js",
     "Skeleton"
   ],
-  "engines" : { "node" : ">=5.0.0" },
+  "engines": {
+    "node": ">=8.9.0"
+  },
   "dependencies": {
-    "hapi": "^15.1.1",
-    "inert": "^4.0.2",
-    "vision": "^4.1.0",
-    "scooter": "^4.0.0",
-    "hapi-swagger": "^7.2.0",
-    "boom": "^4.1.0",
-    "joi": "^9.1.0",
-    "lodash": "^4.16.2",
-    "knex": "^0.12.2",
-    "debug":"2.2.x",
-    "mysql" : "^2.11.1",
-    "bcryptjs": "^2.3.0",
-    "hapi-auth-basic":"^4.2.0",
-    "handlebars":"^4.0.5",
-    "hapi-pino":"^1.2.0",
-    "co": "^4.6.0"
+    "bcryptjs": "^2.4.3",
+    "boom": "^7.1.1",
+    "debug": "3.1.x",
+    "handlebars": "^4.0.11",
+    "hapi": "^17.1.1",
+    "hapi-auth-basic": "^5.0.0",
+    "hapi-swaggered": "^3.0.x",
+    "hapi-swaggered-ui": "^3.0.x",
+    "inert": "^5.0.1",
+    "joi": "^13.0.x",
+    "knex": "^0.14.2",
+    "lodash": "^4.17.4",
+    "mysql": "^2.15.x",
+    "scooter": "^5.0.0",
+    "vision": "^5.2.0",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
-    "code": "^4.0.0",
-    "lab": "^11.1.0",
-    "nodemon":"^1.10.2",
-    "devtool":"^2.2.0",
-    "eslint":"^3.6.1",
-    "eslint-config-hapi": "^10.0.0",
-    "eslint-plugin-hapi": "^4.0.0"
+    "code": "^5.1.x",
+    "lab": "^15.1.2",
+    "nodemon": "^1.12.7",
+    "eslint": "^4.13.1",
+    "eslint-config-hapi": "^11.1.0",
+    "eslint-plugin-hapi": "^4.1.0"
   },
   "author": "Uzysjung",
   "license": "MIT",
