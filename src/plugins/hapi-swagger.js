@@ -5,7 +5,7 @@
 //const Config = require('../../config');
 
 const swaggerConfig = {
-    register: require('hapi-swagger'),
+    plugin: require('hapi-swagger'),
     options: {
         //basePath: config.SWAGGER_URL,
         info : {

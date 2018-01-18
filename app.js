@@ -13,8 +13,7 @@ const main = async () => {
     await Promise.all([ require('./src/plugins/inert')(server), require('./src/plugins/vision')(server)]);
     await require('./src/plugins/scooter')(server);
     await require('./src/plugins/hapi-auth-basic')(server);
-    await require('./src/plugins/hapi-swaggered-ui')(server);
-    // await require('./src/plugins/hapi-swagger')(server); now developing https://github.com/glennjones/hapi-swagger/tree/feature/hapi-17
+    await require('./src/plugins/hapi-swagger')(server); //now developing https://github.com/glennjones/hapi-swagger/tree/feature/hapi-17
 
     server.route(require('./src/routes/api'));
 
