@@ -10,11 +10,11 @@ const server = new Hapi.Server({ port: Config.port, routes: { cors: true , jsonp
 
 const main = async () => {
 
+    await require('./src/plugins/hapi-nuxt')(server);
     await Promise.all([ require('./src/plugins/inert')(server), require('./src/plugins/vision')(server)]);
     await require('./src/plugins/scooter')(server);
     await require('./src/plugins/hapi-auth-basic')(server);
     await require('./src/plugins/hapi-swagger')(server); //now developing https://github.com/glennjones/hapi-swagger/tree/feature/hapi-17
-    await require('./src/plugins/hapi-nuxt')(server);
 
     server.route(require('./src/routes/api'));
 
@@ -59,8 +59,13 @@ process.on('SIGINT', async () => {
 
     // My process has received a SIGINT signal
     // Meaning PM2 is now trying to stop the process
+
+
     try {
-        await server.stop({ timeout:1000 });
+
+        if(Config.type !=='development') {
+            await server.stop({ timeout:1000 });
+        }
     } catch(e) {
         console.error(e);
     }
