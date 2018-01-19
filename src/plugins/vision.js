@@ -10,18 +10,18 @@ module.exports = async (server) => {
     try {
         await server.register(Vision);
 
-        server.views({
-
-            engines: {
-                html: require('handlebars')
-            },
-            relativeTo: __dirname,
-            path: '../views',
-            layout:'default',
-            layoutPath: '../views/layout',
-            partialsPath: '../views/partials'
-
-        });
+        // server.views({
+        //
+        //     engines: {
+        //         html: require('handlebars')
+        //     },
+        //     relativeTo: __dirname,
+        //     path: '../views',
+        //     layout:'default',
+        //     layoutPath: '../views/layout',
+        //     partialsPath: '../views/partials'
+        //
+        // });
     } catch (e) {
         console.error(['error', 'plugin'], 'plugin: vision register error');
         throw e;

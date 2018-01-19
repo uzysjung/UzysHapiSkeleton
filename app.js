@@ -14,11 +14,12 @@ const main = async () => {
     await require('./src/plugins/scooter')(server);
     await require('./src/plugins/hapi-auth-basic')(server);
     await require('./src/plugins/hapi-swagger')(server); //now developing https://github.com/glennjones/hapi-swagger/tree/feature/hapi-17
+    await require('./src/plugins/hapi-nuxt')(server);
 
     server.route(require('./src/routes/api'));
 
     //for static file but not recommend due to performance , use nginx.
-    server.route({ method: 'GET', path: '/public/{path*}', handler: { directory: { path: './public' ,redirectToSlash: true } } });
+    server.route({ method: 'GET', path: '/public/{path*}', handler: { directory: { path: './public' ,redirectToSlash: false } } });
 
 
     //for socket.io

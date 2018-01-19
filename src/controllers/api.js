@@ -13,14 +13,6 @@ exports = module.exports = {
         request.log('api params.id',id);
         request.log('userAgent',request.plugins.scooter.toJSON());
         return  { name : ['api1','api2','api3'], id, page };
-    },
-    root: function (request,h) {
-
-        return h.view('index', { title: 'UzysHapiSkeleton' });
-    },
-    auth: function (request,h) {
-
-        return h.view('authentication', { title: 'UzysHapiSkeleton Basic authentication' });
     }
 };
 

@@ -32,28 +32,5 @@ module.exports = function () {
 
             }
         },
-
-        {
-            method: 'GET',
-            path: '/',
-            config : {
-                description: 'root page',
-                notes: 'root view page ',
-                tags :['root'],
-                handler: ApiController.root
-            }
-        },
-        {
-            method: 'GET',
-            path: '/auth',
-            config : {
-                auth: 'simple',
-                description: 'authentication page',
-                notes: 'auth view page id/pass uzysjung/uzysjung',
-                tags :['auth'],
-                handler: ApiController.auth
-
-            }
-        }
     ];
 }();
