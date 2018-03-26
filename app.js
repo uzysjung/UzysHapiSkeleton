@@ -10,13 +10,13 @@ const server = new Hapi.Server({ port: Config.port, routes: { cors: true , jsonp
 
 const main = async () => {
 
-    await require('./src/plugins/hapi-nuxt')(server);
-    await Promise.all([ require('./src/plugins/inert')(server), require('./src/plugins/vision')(server)]);
-    await require('./src/plugins/scooter')(server);
-    await require('./src/plugins/hapi-auth-basic')(server);
-    await require('./src/plugins/hapi-swagger')(server); //now developing https://github.com/glennjones/hapi-swagger/tree/feature/hapi-17
+    await require('./server/plugins/hapi-nuxt')(server);
+    await Promise.all([ require('./server/plugins/inert')(server), require('./server/plugins/vision')(server)]);
+    await require('./server/plugins/scooter')(server);
+    await require('./server/plugins/hapi-auth-basic')(server);
+    await require('./server/plugins/hapi-swagger')(server); //now developing https://github.com/glennjones/hapi-swagger/tree/feature/hapi-17
 
-    server.route(require('./src/routes/api'));
+    server.route(require('./server/routes/api'));
 
     //for static file but not recommend due to performance , use nginx.
     server.route({ method: 'GET', path: '/public/{path*}', handler: { directory: { path: './public' ,redirectToSlash: false } } });

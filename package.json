@@ -47,7 +47,8 @@
     "scooter": "^5.0.0",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4",
-    "vision": "^5.2.0"
+    "vision": "^5.2.0",
+    "vuetify": "^1.0.10"
   },
   "peerDependencies": {},
   "devDependencies": {
