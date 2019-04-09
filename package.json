@@ -1,22 +1,25 @@
 {
   "name": "uzyshapiskeleton",
-  "version": "0.4.0",
-  "description": "Hapi.js Application Skeleton",
+  "version": "0.1.0",
+  "description": "Yanolja Hapi Skeleton",
   "main": "app.js",
   "scripts": {
-    "start": "pm2 start app.js -i max",
+    "start": "node ./node_modules/pm2/bin/pm2 start process.json",
+    "poststart": "node ./node_modules/pm2/bin/pm2 logs",
     "test": "lab -C -c -m 2000 -l",
     "debug": "node --inspect app.js",
-    "dev": "export NODE_ENV=development &&nodemon  -e js,html app.js --type=development",
+    "dev": "cross-env NODE_ENV=local nodemon  -e js,html app.js --type=local",
     "stop": "./node_modules/.bin/pm2 stop app.js",
     "coverage": "if test -f './converage.html'; then  rm coverage.html; fi && lab -r html -o coverage.html",
     "dep": "npm list --depth 0",
     "outdated": "npm outdated --depth 0",
-    "inspector": "./node_modules/node-inspector/bin/inspector.js"
+    "precommit": "npm run lint",
+    "lint": "eslint --ext .js --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js --ignore-path .gitignore ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uzysjung/UzysHapiSkeleton.git"
+    "url": "git+https://github.com/yanolja/Gaia.git"
   },
   "keywords": [
     "Uzys",
@@ -28,38 +31,55 @@
     "Skeleton"
   ],
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=10.13.0"
   },
   "dependencies": {
+    "adldap": "^3.1.5",
+    "append-query": "^2.0.1",
+    "await-timeout": "^0.3.0",
+    "aws-sdk": "2.382.x",
+    "axios": "^0.18.0",
+    "bassmaster": "^3.2.0",
     "bcryptjs": "^2.4.3",
-    "boom": "^7.1.1",
+    "boom": "7.2.2",
+    "bunyan": "^1.8.12",
     "debug": "3.1.x",
+    "h2o2": "^8.1.2",
     "handlebars": "^4.0.11",
-    "hapi": "^17.2.x",
-    "hapi-auth-basic": "^5.0.0",
-    "hapi-swagger": "^9.0.x",
-    "inert": "^5.0.1",
-    "joi": "^13.0.x",
-    "knex": "^0.14.2",
-    "lodash": "^4.17.4",
-    "mysql": "^2.15.x",
-    "scooter": "^5.0.0",
-    "vision": "^5.2.0",
-    "socket.io": "^2.0.4",
-    "socket.io-client": "^2.0.4"
+    "hapi": "17.8.x",
+    "hapi-auth-basic": "5.0.0",
+    "hapi-swagger": "9.3.x",
+    "inert": "5.1.2",
+    "joi": "14.0.6",
+    "knex": "0.15.2",
+    "lodash": "4.17.11",
+    "moment": "^2.23.0",
+    "murmurhash3js": "^3.0.1",
+    "mysql": "2.16.0",
+    "pm2": "3.2.4",
+    "scooter": "4.0.1",
+    "therealyou": "^2.0.0",
+    "vision": "5.4.3"
   },
+  "peerDependencies": {},
   "devDependencies": {
-    "code": "^5.1.x",
-    "lab": "^15.1.2",
-    "nodemon": "^1.12.7",
-    "eslint": "^4.13.1",
-    "eslint-config-hapi": "^11.1.0",
-    "eslint-plugin-hapi": "^4.1.0"
+    "code": "5.2.x",
+    "cross-env": "^5.2.0",
+    "eslint": "5.9.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-config-hapi": "^12.0.0",
+    "eslint-config-prettier": "3.3.0",
+    "eslint-plugin-hapi": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "lab": "18.0.x",
+    "nodemon": "1.18.6",
+    "prettier": "1.15.2"
   },
   "author": "Uzysjung",
-  "license": "MIT",
+  "license": "private",
+  "private": true,
   "bugs": {
-    "url": "https://github.com/uzysjung/UzysHapiSkeleton/issues"
+    "url": "https://github.com/yanolja/Gaia/issues"
   },
-  "homepage": "https://github.com/uzysjung/UzysHapiSkeleton#readme"
+  "homepage": "https://github.com/yanolja/Gaia"
 }

@@ -1,12 +1,8 @@
 
 {
     "apps" : [{
-    "name"        : "UzysHapiSkeleton",
+    "name"        : "Gaia",
     "script"      : "app.js",
-    "env": {
-        "NODE_ENV": "production",
-        "PORT":"8080"
-    },
     "instances"  : 0,
     "exec_mode"  : "cluster",
     "max_memory_restart" : "1200M",

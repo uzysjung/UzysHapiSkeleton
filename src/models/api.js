@@ -6,7 +6,6 @@
 'use strict';
 
 const UzysDB    = require('../helpers/UzysDB');
-const Co        = require('co');
 const _         = require('lodash');
 
 

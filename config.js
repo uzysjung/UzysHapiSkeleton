@@ -2,52 +2,60 @@
  * Created by Uzysjung on 15. 7. 9..
  */
 'use strict';
-
+const AWS = require('aws-sdk');
 class Config {
 
-    constructor() {
-    }
-    get type() {
-        return process.env.NODE_ENV;
-    }
-    get mysql() {
+  constructor() {
+  }
 
-        let ret = {
-            host     : 'production.io',
-            user     : 'root',
-            password : 'root',
-            database : 'UzysHapiSkeleton_production'
+  get type() {
+    return process.env.NODE_ENV;
+  }
+
+  get mysql() {
+
+    let ret;
+    switch (this.type) {
+
+      case 'development' :
+      case 'local' :
+        ret = {
+          client: 'mysql',
+          connection: {
+            host: 'localhost',
+            user: 'root',
+            password: 'root',
+            database: 'HapiSkeleton'
+          },
+          pool: { min: 0, max: 5 }
         };
-        if (this.type === 'development') {
+        break;
 
-            ret = {
-                host: 'localhost',
-                user: 'root',
-                password: 'root',
-                database: 'UzysHapiSkeleton'
-            };
-        }
-        return ret;
-    }
-    get MYSQL_POOL() {
-        if ( process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test' ) {
-            return { min: 0, max: 20 };
-        }
-
-        return { min: 0, max: 20 };
-    }
-    get port() {
-
-        if (this.type === 'development') {
-            return 8000;
-        }
-        return process.env.PORT;
+      case 'production' :
+      default:
+        break;
     }
 
-    get MYSQL_TIMEOUT() {
-        return 1500;
-    }
+    return ret;
+  }
 
+  get port() {
+
+    if (this.type === 'local') {
+      return 8000;
+    }
+    return process.env.PORT;
+  }
+
+  get bunyanFileStream() {
+    let path = '/var/log/yanolja/gaiaLog.json';
+
+    if( this.type === 'local' ) {
+      path = './bunyan.dev.log.json';
+    }
+    return { type: 'file', path };
+
+  }
 }
 
 exports = module.exports = new Config();

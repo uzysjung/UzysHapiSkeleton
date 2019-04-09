@@ -1,6 +1,3 @@
-/**
- * Created by 1002125 on 15. 7. 9..
- */
 'use strict';
 const Bcrypt = require('bcryptjs');
 
@@ -28,23 +25,18 @@ const validate = async (request, username, password, h) => {
 
 };
 
-
-
-
 exports = module.exports =  async (server) => {
     try {
         await server.register(require('hapi-auth-basic'));
     } catch (e) {
         console.error('Error on hapi-auth-basic Plugin',e);
-        throw e
+        throw e;
     }
     server.auth.strategy('simple', 'basic', { validate });
     console.log(['info', 'plugin'], 'plugin: Hapi-auth-basic registered');
 
     return true;
 };
-
-
 
 function genBcryptHash (passwd) {
     const salt = bcrypt.genSaltSync(10);

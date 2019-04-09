@@ -10,8 +10,8 @@ exports = module.exports =  async (server) => {
     try {
         await server.register(Inert);
     } catch (e) {
-        console.error('Error on Inert Plugin',e);
-        throw e
+      console.error(['error', 'plugin'], 'plugin: inert register error' , e);
+      throw e;
     }
     console.log(['info', 'plugin'], 'plugin: inert registered');
 

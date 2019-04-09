@@ -4,69 +4,48 @@
 
 'use strict';
 const Hapi = require('hapi');
-const Config = require('./config');
-const server = new Hapi.Server({ port: Config.port, routes: { cors: true , jsonp: 'callback' } });
-
+const config = require('./config');
+const server = new Hapi.Server({ port: config.port, routes: { cors: true , jsonp: 'callback' } });
 
 const main = async () => {
 
+  try {
     await Promise.all([ require('./src/plugins/inert')(server), require('./src/plugins/vision')(server)]);
     await require('./src/plugins/scooter')(server);
+    await require('./src/plugins/bassmaster')(server);
+    await require('./src/plugins/h2o2')(server);
+    await require('./src/plugins/therealyou')(server);
     await require('./src/plugins/hapi-auth-basic')(server);
-    await require('./src/plugins/hapi-swagger')(server); //now developing https://github.com/glennjones/hapi-swagger/tree/feature/hapi-17
+    await require('./src/plugins/hapi-swagger')(server);
 
-    server.route(require('./src/routes/api'));
-
+    server.route(require('./src/routes/default'));
     //for static file but not recommend due to performance , use nginx.
     server.route({ method: 'GET', path: '/public/{path*}', handler: { directory: { path: './public' ,redirectToSlash: true } } });
 
-
-    //for socket.io
-    const io = require('socket.io')(server.listener);
-
-    let cnt = 0;
-    io.on('connection', function (socket) {
-
-
-        console.log('ok');
-        socket.emit('who' , { name: 'uzys' });
-
-        socket.on('go', function (data) {
-            socket.emit('come',{ cnt: cnt++ });
-            console.log('go',data);
-        });
-    });
-
     await server.start();
-    return server;
+
+    console.log(['info', 'server'], 'Server environment: ' + config.type);
+    console.log(['info', 'server'], 'Server running at: ' + server.info.uri);
+
+  } catch (e) {
+    console.error(['error', 'server'],'Server Error Occured' + e);
+    console.error('stack - ',e.stack);
+  }
+  return server;
 };
-
-
-main()
-    .then( (sv) => {
-        console.log(['info', 'server'], 'Server environment: ' + Config.type);
-        console.log(['info', 'server'], 'Server running at: ' + sv.info.uri);
-    } )
-    .catch( (err) => {
-        console.log(['error', 'server'],'Server Error Occured' + err);
-        console.log('stack - ',err.stack);
-        process.exit(1);
-    });
-
+main();
 
 process.on('SIGINT', async () => {
-
-    // My process has received a SIGINT signal
-    // Meaning PM2 is now trying to stop the process
-    try {
-        await server.stop({ timeout:1000 });
-    } catch(e) {
-        console.error(e);
+  try {
+    if(config.type !=='development') {
+      console.log('Gaia Hapi stoppping Hapi');
+      await server.stop({ timeout:1000 });
     }
-    console.log('Colloseo Hapi server stopped');
-    process.exit();
-
-
+  } catch(e) {
+    console.error(e);
+  }
+  console.log('Gaia Hapi stopped');
+  return process.exit(0);
 });
 
 

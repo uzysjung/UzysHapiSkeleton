@@ -1,5 +1,5 @@
 {
   "extends" : [
-    "hapi"
+    "plugin:node/recommended"
   ]
 }

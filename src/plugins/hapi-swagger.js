@@ -19,13 +19,12 @@ const swaggerConfig = {
     }
 };
 
-
 exports = module.exports =  async (server) => {
     try {
         await server.register(swaggerConfig);
     } catch (e) {
-        console.error('Error on Swagger Plugin',e);
-        throw e
+      console.error(['error', 'plugin'], 'plugin: Swagger register error' , e);
+      throw e
     }
     console.log(['info', 'plugin'], 'plugin: Swagger registered');
 

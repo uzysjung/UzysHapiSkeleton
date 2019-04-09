@@ -2,19 +2,58 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>UzysHapiSkeleton</title>
+    <title>Gaia </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/public/img/favicon.png">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script
+            src="//code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" type="text/css" >
     <link href="/public/css/base.css" rel="stylesheet" />
 
+    <script>
+      $(document)
+        .ready(function() {
+
+          // fix main menu to page on passing
+          $('.main.menu').visibility({
+            type: 'fixed'
+          });
+          $('.overlay').visibility({
+            type: 'fixed',
+            offset: 80
+          });
+
+          // lazy load images
+          $('.image').visibility({
+            type: 'image',
+            transition: 'vertical flip in',
+            duration: 500
+          });
+
+          // show dropdown on hover
+          $('.main.menu  .ui.dropdown').dropdown({
+            on: 'hover'
+          });
+
+          $('scrollToTop').click(function(){ $('scrollToTop').scrollIntoView({ behavior: 'smooth' }); } );
+        });
+    </script>
+    <style type="text/css">
+
+
+    </style>
+
 </head>
+
 <body>
+
+
 {{> header}}
-<div class="container">
     {{{content}}}
     {{> footer}}
-</div><!-- /.container -->
 
 </body>
 </html>

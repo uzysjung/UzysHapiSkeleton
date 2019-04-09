@@ -31,23 +31,33 @@ describe('math', () => {
     });
 });
 
+//
+// const Server = require('../app');
+//
+//
+//
+// test('main endpoint lists apis on the network', async () => {
+//
+//     const options = {
+//         method: 'GET',
+//         url: '/api/3'
+//     };
+//
+//     const response = await Server.inject(options);
+//     const result = response.result;
+//     console.log('result:',result);
+//     Code.expect(response.statusCode).to.equal(200);
+//     Code.expect(result.name).to.be.instanceof(Array);
+//     Code.expect(result.name).to.have.length(3);
+//
+// });
 
-const Server = require('../app');
-
-
-
-test('main endpoint lists apis on the network', async () => {
-
-    const options = {
-        method: 'GET',
-        url: '/api/3'
-    };
-
-    const response = await Server.inject(options);
-    const result = response.result;
-    console.log('result:',result);
-    Code.expect(response.statusCode).to.equal(200);
-    Code.expect(result.name).to.be.instanceof(Array);
-    Code.expect(result.name).to.have.length(3);
-
-});
+// // DynamoDBFetch
+// const main = async ()=>{
+//   const confDBFetch = require('./periodicDBFetching').fetchAll;
+//   await confDBFetch();
+//   const DBConfig = require('./periodicDBFetching').db;
+//   const rest =await internals.fetchMethod( 1, 'uid0' , 'itemId', { limit :4 , serviceType : 55 } , DBConfig.methods['3'] );
+//   console.log('rest',rest);
+// };
+// main();
